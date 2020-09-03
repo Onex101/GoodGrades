@@ -25,6 +25,8 @@ import Room from '@material-ui/icons/Room';
 let tutors = [];
 let events = [];
 
+const DOMAIN_URL = process.env.REACT_APP_DOMAIN_URL ? `${process.env.REACT_APP_DOMAIN_URL}` : `https://good-grades-server.herokuapp.com`;
+
 const filterTasks = (items, tutorId) =>
   items.filter(task => {
     if (task.booked === false && (!tutorId || task.tutor === tutorId)) {
@@ -272,7 +274,7 @@ export default class Demo extends React.PureComponent {
   }
 
   getEvents() {
-    fetch(`https://good-grades-server.herokuapp.com/api/events`, {
+    fetch(`${DOMAIN_URL}/api/events`, {
       method: 'GET',
       headers: {
         'content-type': 'application/json'
@@ -294,7 +296,7 @@ export default class Demo extends React.PureComponent {
 
   async componentDidMount() {
     await fetch(
-      `https://good-grades-server.herokuapp.com/api/users/tutor/getAllTutors`,
+      `${DOMAIN_URL}/api/users/tutor/getAllTutors`,
       {
         method: 'GET',
         headers: {
@@ -321,7 +323,7 @@ export default class Demo extends React.PureComponent {
   bookSession(appointmentData) {
     console.log({ appointmentData });
     fetch(
-      `https://good-grades-server.herokuapp.com/api/events/addStudentToEvent`,
+      `${DOMAIN_URL}/api/events/addStudentToEvent`,
       {
         method: 'POST',
         headers: {

@@ -3,6 +3,8 @@ import JoinModalButton from '../components/JoinModalButton';
 import IconTextField from '../components/IconTextField';
 import { Button } from '@material-ui/core';
 
+const DOMAIN_URL = process.env.REACT_APP_DOMAIN_URL ? `${process.env.REACT_APP_DOMAIN_URL}` : `https://good-grades-server.herokuapp.com`;
+
 //Makes API call to GoodGradesServer to create a new room object
 
 export const HomeView = props => {
@@ -17,7 +19,7 @@ export const HomeView = props => {
   useEffect(() => {
     if (!room && props.user && props.user.type === 'tutor') {
       var targetUrl =
-        'https://good-grades-server.herokuapp.com/api/users/' +
+        `${DOMAIN_URL}/api/users/` +
         props.user.unique_id +
         '/room';
       fetch(targetUrl)

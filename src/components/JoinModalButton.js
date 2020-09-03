@@ -25,6 +25,10 @@ import { NOTIFICATION } from '../socketEvents.js';
 var colors = ['#f50057', '#1de9b6', '#00b0ff'];
 var random_color = colors[Math.floor(Math.random() * colors.length)];
 
+// require('dotenv').config({path: __dirname+'/.env'});
+const DOMAIN_URL = process.env.REACT_APP_DOMAIN_URL ? `${process.env.REACT_APP_DOMAIN_URL}` : `https://good-grades-server.herokuapp.com`;
+// const DOMAIN_URL = process.env.REACT_APP_DOMAIN_URL;
+
 const useStyles = makeStyles(theme => ({
   modal: {
     display: 'flex',
@@ -130,7 +134,7 @@ export default function SpringModal(props) {
 
   const notifyTutors = () => {
     let targetUrl =
-      'https://good-grades-server.herokuapp.com/api/quickHelp/createQuickHelp';
+      `${DOMAIN_URL}/api/quickHelp/createQuickHelp`;
     fetch(targetUrl, {
       method: 'POST',
       headers: {

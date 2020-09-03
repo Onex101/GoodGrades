@@ -49,6 +49,8 @@ import { isMobile } from 'react-device-detect';
 
 import {RELOAD_DATA} from '../socketEvents';
 
+const DOMAIN_URL = process.env.REACT_APP_DOMAIN_URL ? `${process.env.REACT_APP_DOMAIN_URL}` : `https://good-grades-server.herokuapp.com`;
+
 const containerStyles = theme => ({
   container: {
     width: theme.spacing(68),
@@ -493,7 +495,7 @@ class TutorSchedulerView2 extends React.PureComponent {
 
   getAppointments = unique_id => {
     fetch(
-      `https://good-grades-server.herokuapp.com/api/events/byTutor/${unique_id}`,
+      `${DOMAIN_URL}/api/events/byTutor/${unique_id}`,
       {
         method: 'GET',
         headers: {
@@ -551,7 +553,7 @@ class TutorSchedulerView2 extends React.PureComponent {
         appointment => appointment.id !== deletedAppointmentId
       );
       fetch(
-        'https://good-grades-server.herokuapp.com/api/events/deleteEvent',
+        `${DOMAIN_URL}/api/events/deleteEvent`,
         {
           method: 'POST',
           headers: {
@@ -590,7 +592,7 @@ class TutorSchedulerView2 extends React.PureComponent {
         };
         data = [...data, newAppointment];
         fetch(
-          'https://good-grades-server.herokuapp.com/api/events/createEvent',
+          `${DOMAIN_URL}/api/events/createEvent`,
           {
             method: 'POST',
             headers: {
@@ -620,7 +622,7 @@ class TutorSchedulerView2 extends React.PureComponent {
               new_end_time: changed[appointment.id].endDate
             };
             fetch(
-              'https://good-grades-server.herokuapp.com/api/events/updateEvent',
+              `${DOMAIN_URL}/api/events/updateEvent`,
               {
                 method: 'POST',
                 headers: {
@@ -645,7 +647,7 @@ class TutorSchedulerView2 extends React.PureComponent {
       }
       if (deleted !== undefined) {
         // fetch(
-        //   'https://good-grades-server.herokuapp.com/api/events/deleteEvent',
+          // `${DOMAIN_URL}/api/events/deleteEvent`,
         //   {
         //     method: 'POST',
         //     headers: {

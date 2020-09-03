@@ -17,6 +17,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { isMobile } from 'react-device-detect';
 
+const DOMAIN_URL = process.env.REACT_APP_DOMAIN_URL ? `${process.env.REACT_APP_DOMAIN_URL}` : `https://good-grades-server.herokuapp.com`;
+
 // import useStateWithLocalStorage from './components/UseStateWithLocalStorage.js';
 
 const useStateWithLocalStorage = localStorageKey => {
@@ -29,7 +31,7 @@ const useStateWithLocalStorage = localStorageKey => {
   return [value, setValue];
 };
 
-const socketEndpoint = 'https://good-grades-server.herokuapp.com';
+const socketEndpoint = DOMAIN_URL;
 
 function App() {
   const [user, setUser] =  
@@ -44,9 +46,9 @@ function App() {
 
   const getBookings = useCallback(() => {
     var targetUrl = user.type === "tutor" ?
-    'https://good-grades-server.herokuapp.com/api/events/byTutor/' + user.unique_id + '/booked'
+    `${DOMAIN_URL}/api/events/byTutor/` + user.unique_id + '/booked'
     :
-    'https://good-grades-server.herokuapp.com/api/events/byStudent/' + user.unique_id
+    `${DOMAIN_URL}/api/events/byStudent/` + user.unique_id
     fetch(targetUrl)
       .then(blob => blob.json())
       .then(data => {
@@ -109,7 +111,7 @@ function App() {
   }
 
   const getQuickHelp = () => {
-    var targetUrl = 'https://good-grades-server.herokuapp.com/api/quickHelp';
+    var targetUrl = `${DOMAIN_URL}/api/quickHelp`;
     fetch(targetUrl)
       .then(blob => blob.json())
       .then(data => {

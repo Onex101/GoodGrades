@@ -16,6 +16,8 @@ import LoginCard from '../components/LoginCard';
 import './GoogleButton.css';
 import './FacebookButton.css';
 
+const DOMAIN_URL = process.env.REACT_APP_DOMAIN_URL ? `${process.env.REACT_APP_DOMAIN_URL}` : `https://good-grades-server.herokuapp.com`;
+
 const responseGoogle = response => {
   console.log(response);
 };
@@ -72,7 +74,7 @@ class Login extends React.Component {
       profileObj.unique_id = response.profileObj.googleId;
     }
     var targetUrl =
-      'https://good-grades-server.herokuapp.com/api/users/' +
+      `${DOMAIN_URL}/api/users/` +
       profileObj.unique_id;
     this.setState({ loading: true });
     fetch(targetUrl)
@@ -125,7 +127,7 @@ class Login extends React.Component {
     let tmp = { ...this.state.user, type: response };
     this.setState({ user: tmp, loading: true });
     var targetUrl =
-      'https://good-grades-server.herokuapp.com/api/users/createUser';
+      `${DOMAIN_URL}/api/users/createUser`;
     fetch(targetUrl, {
       method: 'POST', // or 'PUT'
       body: JSON.stringify({ ...this.state.user, type: response }), // data can be `string` or {object}!

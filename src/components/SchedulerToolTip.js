@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 
+const DOMAIN_URL = process.env.REACT_APP_DOMAIN_URL ? `${process.env.REACT_APP_DOMAIN_URL}` : `https://good-grades-server.herokuapp.com`;
+
 export default class SchedulerToolTip extends Component {
     
     bookSession(appointmentData){
         console.log({appointmentData})
         fetch(
-          `https://good-grades-server.herokuapp.com/api/events/addStudentToEvent`,
+          `${DOMAIN_URL}/api/events/addStudentToEvent`,
           {
             method: 'POST',
             headers: {

@@ -15,6 +15,8 @@ import { NOTIFICATION } from '../socketEvents';
 
 const ONE_HOUR = 60 * 60 * 1000;
 
+const DOMAIN_URL = process.env.REACT_APP_DOMAIN_URL ? `${process.env.REACT_APP_DOMAIN_URL}` : `https://good-grades-server.herokuapp.com`;
+
 const checkIfHourBeforeSession = start_time => {
   let curDate = new Date();
   let curStart = moment(start_time);
@@ -33,7 +35,7 @@ export const BookingsView = props => {
 
   const getQuickHelpResponse = (elm, student, roomCode) => {
     let targetUrl =
-      'https://good-grades-server.herokuapp.com/api/quickHelp/addTutorToQuickHelp';
+      `${DOMAIN_URL}/api/quickHelp/addTutorToQuickHelp`;
     fetch(targetUrl, {
       method: 'POST',
       headers: {

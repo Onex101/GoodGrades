@@ -29,6 +29,8 @@ import { isMobile } from 'react-device-detect';
 
 import {RELOAD_DATA} from '../socketEvents';
 
+const DOMAIN_URL = process.env.REACT_APP_DOMAIN_URL ? `${process.env.REACT_APP_DOMAIN_URL}` : `https://good-grades-server.herokuapp.com`;
+
 const useStyles = makeStyles(theme => ({
   line: {
     height: '2px',
@@ -279,7 +281,7 @@ export default class StudentSchedulerView extends React.Component {
   loadData() {
     // console.log('fetchin frahm api');
     fetch(
-      `https://good-grades-server.herokuapp.com/api/events/byStudent/${this.props.user.unique_id}`,
+      `${DOMAIN_URL}/api/events/byStudent/${this.props.user.unique_id}`,
       {
         method: 'GET',
         headers: {
@@ -321,7 +323,7 @@ export default class StudentSchedulerView extends React.Component {
   loadAllTutorsData() {
     // console.log('fetching all tutors and their events');
     fetch(
-      `https://good-grades-server.herokuapp.com/api/users/tutor/getAllTutors/events`,
+      `${DOMAIN_URL}/api/users/tutor/getAllTutors/events`,
       {
         method: 'GET',
         headers: {
@@ -365,7 +367,7 @@ export default class StudentSchedulerView extends React.Component {
   bookSession(appointmentData) {
     // console.log({ appointmentData });
     fetch(
-      `https://good-grades-server.herokuapp.com/api/events/addStudentToEvent`,
+      `${DOMAIN_URL}/api/events/addStudentToEvent`,
       {
         method: 'POST',
         headers: {
